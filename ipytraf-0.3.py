@@ -5,7 +5,7 @@
 # (c) Franck LABADILLE  ; franck {at} kernlog [dot] net
 # IRC : Franck @ irc.oftc.net
 #       
-# Version 0.2  ; 2011-12-29
+# Version 0.3  ; 2011-12-30
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -81,8 +81,8 @@ import pyosd
 import pdb
 
 logfile = "/var/log/iptables.log"
-database = os.path.join(os.path.expanduser("~"), ".ipytraf.db")
-errorfile = os.path.join(os.path.expanduser("~"), ".ipytraf_errors")
+database = os.path.join(os.path.expanduser("~"), ".ipytraf-dev.db")
+errorfile = os.path.join(os.path.expanduser("~"), ".ipytraf-dev_errors")
 IpytrafBase = declarative_base()
 osdconf = {
     "ip_pingi": {
