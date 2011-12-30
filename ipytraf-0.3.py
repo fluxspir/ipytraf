@@ -280,7 +280,7 @@ class LogParser:
     def _iptabletcp(self, line):
         ptcp = re.match(r"""
             .+
-            DF\sPROTO=TCP\s                  #  TCP
+            D?F?\s?PROTO=TCP\s                  #  TCP
             SPT=(\d{1,5})\s                    # 1 source port   
             DPT=(\d{1,5})\s                    # 2 dest port     
             WINDOW=(\d+)\s                     # 3 window              
@@ -601,6 +601,7 @@ class PreciseDisplay():
         return msg
 
     def showlog(self):
+        pdb.set_trace()
         if self.data["protocole"] == "tcp":
             msg = self._tcpdata()
         elif self.data["protocole"] == "udp":
