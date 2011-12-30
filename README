@@ -1,4 +1,4 @@
 ipytraf was design to parse iptables log with specifics prefix,
-stocks this logs into a database, while displaying it via OSD,
-and, in further version (0.2), it might be possible to visit and
+stocks this logs into a database while displaying it via OSD,
+and, in further version (0.3), it might be possible to visit and
 extract datas from database to explore logs.
