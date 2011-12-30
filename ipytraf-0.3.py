@@ -611,7 +611,7 @@ class PreciseDisplay():
         elif self.data["protocole"] == "2":
             msg = self._proto2display()
         else:
-            msg = "protocole inconnue, voire fichier d'erreurs"
+            msg = "protocole inconnu, voir fichier d'erreurs"
         print(msg)
 
 if __name__ == "__main__":
