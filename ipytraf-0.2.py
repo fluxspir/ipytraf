@@ -216,7 +216,7 @@ class LogParser:
             (.\d{2}:\d{2})\s                   # 5 tz
             (\w+)\s                            # 6 hostname
             kernel:\s
-            \[(\d+\.\d+)\]\s                   # 7 uptime
+            \[\s?(\d+\.\d+)\]\s                   # 7 uptime
             \[(ip_.+)\]                        # 8 iptable log-prefix
             IN=(\w*)\s                         # 9 interface in
             OUT=(\w*)\s                        # 10 inet out
@@ -250,7 +250,8 @@ class LogParser:
         else:
             with open(errorfile, "a") as fp:
                 fp.write(line)
-            print("Need to config regex base in iptraffic.py")
+            print("Need to config regex base in iptraffic.py for {}\
+                                            ".format(self.log["timestamp"]))
        
     def _iptableip(self, line):
         packet = re.match(r"""
@@ -275,7 +276,8 @@ class LogParser:
         else:
             with open(errorfile, "a") as fp:
                 fp.write(line)
-            print("Need to conf regex LogParser in ipytraf.py")
+            print("Need to conf regex packet in ipytraf.py {}\
+                                            ".format(self.log["timestamp"]))
 
     def _iptabletcp(self, line):
         ptcp = re.match(r"""
@@ -430,9 +432,6 @@ class DbHandler:
         #fromsqlalchemy.orm import sessionmaker
         Session = sessionmaker(bind=self.eng)
         self.session = Session()
-
-    def logalreadyexist(self):
-        pass
 
     def addnewlog(self, d):
         """ """
