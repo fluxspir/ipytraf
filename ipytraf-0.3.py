@@ -82,8 +82,8 @@ import pyosd
 import pdb
 
 logfile = "/var/log/iptables.log"
-database = os.path.join(os.path.expanduser("~"), ".ipytraf-dev.db")
-errorfile = os.path.join(os.path.expanduser("~"), ".ipytraf-dev_errors")
+database = os.path.join(os.path.expanduser("~"), ".ipytraf.db")
+errorfile = os.path.join(os.path.expanduser("~"), ".ipytraf_errors")
 IpytrafBase = declarative_base()
 osdconf = {
     "ip_pingi": {
@@ -574,7 +574,6 @@ class OsdDisplay:
 
     def show(self):
         (msg, osdconf) = self._makeosdmsg()
-#        subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         try:
             subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         except TypeError:

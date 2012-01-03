@@ -574,7 +574,6 @@ class OsdDisplay:
 
     def show(self):
         (msg, osdconf) = self._makeosdmsg()
-#        subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         try:
             subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         except TypeError:
