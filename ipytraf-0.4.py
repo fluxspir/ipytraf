@@ -5,7 +5,7 @@
 # (c) Franck LABADILLE  ; franck {at} kernlog [dot] net
 # IRC : Franck @ irc.oftc.net
 #       
-# Version 0.3  ; 2011-12-30
+# Version 0.4  ; 2011-12-30
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -570,12 +570,12 @@ class OsdDisplay:
         self.p.set_horizontal_offset(osdconf["h_offset"])
         self.p.set_vertical_offset(osdconf["v_offset"])
         self.p.display(self.msg)
-#        self.p.wait_until_no_display()
+        self.p.wait_until_no_display()
 
     def show(self):
         (msg, osdconf) = self._makeosdmsg()
         try:
-            subprocess.Popen(self._osddisplay(msg, osdconf)).pid
+            pid = subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         except TypeError:
             pass
 

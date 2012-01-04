@@ -570,12 +570,12 @@ class OsdDisplay:
         self.p.set_horizontal_offset(osdconf["h_offset"])
         self.p.set_vertical_offset(osdconf["v_offset"])
         self.p.display(self.msg)
-#        self.p.wait_until_no_display()
+        self.p.wait_until_no_display()
 
     def show(self):
         (msg, osdconf) = self._makeosdmsg()
         try:
-            subprocess.Popen(self._osddisplay(msg, osdconf)).pid
+            pid = subprocess.Popen(self._osddisplay(msg, osdconf)).pid
         except TypeError:
             pass
 
