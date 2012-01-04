@@ -443,8 +443,9 @@ class DbHandler:
             u = IptableLog(d)
             self.session.add(u)
             self.session.commit()
+            return True
         except sqlalchemy.exc.IntegrityError:
-            pass
+            return False
 
     def checktimestamp(self, d):
         existing_log = (
@@ -630,9 +631,8 @@ if __name__ == "__main__":
                     if d["timestamp"]:
                         newdata = ""
                         archive = DbHandler(database)
-                        newdata = archive.checktimestamp(d)
+                        newdata =archive.addnewlog(d)
                         if newdata:
-                            archive.addnewlog(d)
                             more = PreciseDisplay(d)
                             more.showlog()
                             osd = OsdDisplay(d, osdconf)
