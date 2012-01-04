@@ -444,8 +444,7 @@ class DbHandler:
             self.session.add(u)
             self.session.commit()
             return True
-        except (sqlalchemy.exc.IntegrityError,\
-                                        sqlalchemy.exc.InvalidRequestError):
+        except sqlalchemy.exc.IntegrityError:
             return False
 
     def checktimestamp(self, d):
@@ -632,8 +631,9 @@ if __name__ == "__main__":
                 try:
                     if d["timestamp"]:
                         newdata = ""
-                        newdata = archive.addnewlog(d)
+                        newdata = archive.checktimestamp(d)
                         if newdata:
+                            archive.addnewlog(d)
                             more = PreciseDisplay(d)
                             more.showlog()
                             osd = OsdDisplay(d, osdconf)

@@ -5,7 +5,7 @@
 # (c) Franck LABADILLE  ; franck {at} kernlog [dot] net
 # IRC : Franck @ irc.oftc.net
 #       
-# Version 0.4  ; 2011-12-30
+# Version 0.4  ; 2012-01-04
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions
@@ -443,8 +443,9 @@ class DbHandler:
             u = IptableLog(d)
             self.session.add(u)
             self.session.commit()
+            return True
         except sqlalchemy.exc.IntegrityError:
-            pass
+            return False
 
     def checktimestamp(self, d):
         existing_log = (
@@ -621,6 +622,7 @@ class PreciseDisplay():
 
 if __name__ == "__main__":
 
+    archive = DbHandler(database)
     def analyselog(data):
         p = LogParser(data)
         logs_of_interest = p.iptablelog()
@@ -629,7 +631,6 @@ if __name__ == "__main__":
                 try:
                     if d["timestamp"]:
                         newdata = ""
-                        archive = DbHandler(database)
                         newdata = archive.checktimestamp(d)
                         if newdata:
                             archive.addnewlog(d)
