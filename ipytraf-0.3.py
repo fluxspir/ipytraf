@@ -444,7 +444,8 @@ class DbHandler:
             self.session.add(u)
             self.session.commit()
             return True
-        except sqlalchemy.exc.IntegrityError:
+        except (sqlalchemy.exc.IntegrityError,\
+                                        sqlalchemy.exc.InvalidRequestError):
             return False
 
     def checktimestamp(self, d):
@@ -622,6 +623,7 @@ class PreciseDisplay():
 
 if __name__ == "__main__":
 
+    archive = DbHandler(database)
     def analyselog(data):
         p = LogParser(data)
         logs_of_interest = p.iptablelog()
@@ -630,8 +632,7 @@ if __name__ == "__main__":
                 try:
                     if d["timestamp"]:
                         newdata = ""
-                        archive = DbHandler(database)
-                        newdata =archive.addnewlog(d)
+                        newdata = archive.addnewlog(d)
                         if newdata:
                             more = PreciseDisplay(d)
                             more.showlog()
